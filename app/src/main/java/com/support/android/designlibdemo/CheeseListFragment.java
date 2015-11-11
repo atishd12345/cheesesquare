@@ -33,6 +33,8 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -42,6 +44,7 @@ public class CheeseListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.v(TAG, "CheeseListFragment onCreateView");
         RecyclerView rv = (RecyclerView) inflater.inflate(
                 R.layout.fragment_cheese_list, container, false);
         setupRecyclerView(rv);
@@ -49,12 +52,14 @@ public class CheeseListFragment extends Fragment {
     }
 
     private void setupRecyclerView(RecyclerView recyclerView) {
+         Log.v(TAG, "CheeseListFragment setupRecyclerView");
         recyclerView.setLayoutManager(new LinearLayoutManager(recyclerView.getContext()));
         recyclerView.setAdapter(new SimpleStringRecyclerViewAdapter(getActivity(),
                 getRandomSublist(Cheeses.sCheeseStrings, 30)));
     }
 
     private List<String> getRandomSublist(String[] array, int amount) {
+        Log.v(TAG, "CheeseListFragment getRandomSublist");
         ArrayList<String> list = new ArrayList<>(amount);
         Random random = new Random();
         while (list.size() < amount) {
@@ -65,12 +70,13 @@ public class CheeseListFragment extends Fragment {
 
     public static class SimpleStringRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleStringRecyclerViewAdapter.ViewHolder> {
-
+og.v(TAG, "CheeseListFragment getRandomSublist");
         private final TypedValue mTypedValue = new TypedValue();
         private int mBackground;
         private List<String> mValues;
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
+              Log.v(TAG, "CheeseListFragment ViewHolder");
             public String mBoundString;
 
             public final View mView;
@@ -79,6 +85,7 @@ public class CheeseListFragment extends Fragment {
 
             public ViewHolder(View view) {
                 super(view);
+                
                 mView = view;
                 mImageView = (ImageView) view.findViewById(R.id.avatar);
                 mTextView = (TextView) view.findViewById(android.R.id.text1);
@@ -91,10 +98,12 @@ public class CheeseListFragment extends Fragment {
         }
 
         public String getValueAt(int position) {
+            Log.v(TAG, "CheeseListFragment getValueAt");
             return mValues.get(position);
         }
 
         public SimpleStringRecyclerViewAdapter(Context context, List<String> items) {
+            Log.v(TAG, "CheeseListFragment SimpleStringRecyclerViewAdapter");
             context.getTheme().resolveAttribute(R.attr.selectableItemBackground, mTypedValue, true);
             mBackground = mTypedValue.resourceId;
             mValues = items;
@@ -102,6 +111,7 @@ public class CheeseListFragment extends Fragment {
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            Log.v(TAG, "CheeseListFragment onCreateViewHolder");
             View view = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.list_item, parent, false);
             view.setBackgroundResource(mBackground);
@@ -110,10 +120,12 @@ public class CheeseListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
+            Log.v(TAG, "CheeseListFragment onBindViewHolder");
             holder.mBoundString = mValues.get(position);
             holder.mTextView.setText(mValues.get(position));
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
+                 Log.v(TAG, "CheeseListFragment holder.mView.setOnClickListener");
                 @Override
                 public void onClick(View v) {
                     Context context = v.getContext();
@@ -132,6 +144,7 @@ public class CheeseListFragment extends Fragment {
 
         @Override
         public int getItemCount() {
+            Log.v(TAG, "CheeseListFragment getItemCount");
             return mValues.size();
         }
     }
