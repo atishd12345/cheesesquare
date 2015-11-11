@@ -40,6 +40,7 @@ import java.util.List;
 import java.util.Random;
 
 public class CheeseListFragment extends Fragment {
+    private static final String TAG = "cheese";
 
     @Nullable
     @Override
