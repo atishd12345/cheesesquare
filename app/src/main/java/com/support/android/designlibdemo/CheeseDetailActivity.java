@@ -26,17 +26,20 @@ import android.view.MenuItem;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-
+import android.util.Log;
 import java.util.Random;
 
 public class CheeseDetailActivity extends AppCompatActivity {
-
+    private static final String TAG = "cheese";
+ 
     public static final String EXTRA_NAME = "cheese_name";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+        
+Log.v(TAG, "CheeseDetailActivity onCreate");
 
         Intent intent = getIntent();
         final String cheeseName = intent.getStringExtra(EXTRA_NAME);
@@ -53,12 +56,14 @@ public class CheeseDetailActivity extends AppCompatActivity {
     }
 
     private void loadBackdrop() {
+        Log.v(TAG, "CheeseDetailActivity loadBackdrop");
         final ImageView imageView = (ImageView) findViewById(R.id.backdrop);
         Glide.with(this).load(Cheeses.getRandomCheeseDrawable()).centerCrop().into(imageView);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+         Log.v(TAG, "CheeseDetailActivity onCreateOptionsMenu");
         getMenuInflater().inflate(R.menu.sample_actions, menu);
         return true;
     }
